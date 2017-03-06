@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "588871054291",
+    "firebase_url": "https://sunstudyenglish.firebaseio.com",
+    "project_id": "sunstudyenglish",
+    "storage_bucket": "sunstudyenglish.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:588871054291:android:56b44ad20a47de80",
+        "android_client_info": {
+          "package_name": "com.karrel.sunstudyenglish"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "588871054291-gqqqf7eoutccu47k0crlt1s696nt4k9r.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.karrel.sunstudyenglish",
+            "certificate_hash": "49490d3897e2905ccf7574b40467a3936044d79f"
+          }
+        },
+        {
+          "client_id": "588871054291-m9ktl9l5ts47mljlib8g5rsvgatffvsn.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-M7_iSoPhoTheKysXo44dUASHWK_G118"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "588871054291-m9ktl9l5ts47mljlib8g5rsvgatffvsn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
