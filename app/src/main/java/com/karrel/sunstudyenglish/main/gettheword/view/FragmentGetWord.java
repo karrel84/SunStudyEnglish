@@ -85,6 +85,18 @@ public class FragmentGetWord extends BaseFragment {
             Log.e(TAG, item.toString());
             // 아답터에 넣어줘라
             mAdapter.addItem(item);
+            // 제일 하단으로 이동
+            mBinding.recyclerView.smoothScrollToPosition(mBinding.recyclerView.getAdapter().getItemCount());
+        }
+
+        @Override
+        public void showProgress() {
+            showProgressDialog();
+        }
+
+        @Override
+        public void hideProgress() {
+            hideProgressDialog();
         }
     };
 }

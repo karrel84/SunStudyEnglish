@@ -1,4 +1,4 @@
-package com.karrel.sunstudyenglish.main;
+package com.karrel.sunstudyenglish.main.main.view;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;

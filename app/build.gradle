@@ -48,16 +48,13 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-//    compile 'com.google.firebase:firebase-database:11.0.1' // 파이어베이스 실시간 디비
-    // 멀티덱스관련 에러발생
-    // rx 안드로이드
-    // okhttp
+    compile 'com.google.firebase:firebase-database:11.0.1' // 파이어베이스 실시간 디비
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-v4:25.3.1'
-    compile 'com.android.support:multidex:1.0.0'
-    compile 'io.reactivex:rxandroid:1.1.0'
-    compile 'com.squareup.okhttp3:okhttp:3.5.0'
+    compile 'com.android.support:multidex:1.0.0'// 멀티덱스관련 에러발생
+    compile 'io.reactivex:rxandroid:1.1.0'// rx 안드로이드
+    compile 'com.squareup.okhttp3:okhttp:3.5.0'// okhttp
     compile 'com.android.support:design:25.3.1'
     compile 'com.android.support:support-vector-drawable:25.3.1'
     testCompile 'junit:junit:4.12'

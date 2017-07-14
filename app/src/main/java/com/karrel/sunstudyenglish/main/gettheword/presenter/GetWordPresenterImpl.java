@@ -8,6 +8,7 @@ import com.karrel.sunstudyenglish.main.gettheword.utils.EnglishToKorean;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
 
 import rx.Observable;
@@ -44,13 +45,39 @@ public class GetWordPresenterImpl implements GetWordPresenter {
     public void showWord(ArrayList<String> wordsList) {
         Log.d(TAG, wordsList.toString());
 
-        Observable.from(wordsList)
-                .filter(s -> !TextUtils.isEmpty(s)) // 빈값인지 판단
-                .filter(s -> regularExpression(s)) // 문자인지 판단
-                .map(s -> new WordItem(s, mEnglishToKorean.getWord(s))) // 문자의 뜻을 가져옴
+        mView.showProgress();
+
+        getWord(wordsList)
                 .subscribeOn(Schedulers.io()) // 작업은 비동기 스레드에서
                 .observeOn(AndroidSchedulers.mainThread()) // UI작업은 메인스레드에서
-                .subscribe(item -> mView.addWordItem(item));
+                .subscribe(new Subscriber<WordItem>() {
+                    @Override
+                    public void onCompleted() {
+                        mView.hideProgress();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+
+                    @Override
+                    public void onNext(WordItem wordItem) {
+                        mView.addWordItem(wordItem);
+                    }
+                });
+    }
+
+    private Observable<WordItem> getWord(ArrayList<String> wordsList) {
+        return Observable.from(wordsList)
+                .filter(s -> !TextUtils.isEmpty(s)) // 빈값인지 판단
+                .filter(s -> regularExpression(s)) // 문자인지 판단
+                .map(s ->
+                {
+                    String wordMeans = mEnglishToKorean.getWord(s);
+                    if (TextUtils.isEmpty(wordMeans.trim())) return null;
+                    else return new WordItem(s, wordMeans);
+                }) // 문자의 뜻을 가져옴
+                .filter(i -> i != null);
     }
 
     /**

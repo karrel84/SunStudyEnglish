@@ -1,5 +1,6 @@
 package com.karrel.sunstudyenglish.base.view;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -12,6 +13,8 @@ import android.view.View;
 
 public class BaseFragment extends Fragment {
     protected Context mContext;
+    protected ProgressDialog mProgressDlg;
+
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
@@ -45,6 +48,8 @@ public class BaseFragment extends Fragment {
      * 필요한 인스턴스를 만드는 작업을하자
      */
     final public void loadOnce() {
+        // 프로그래스 다이얼로그를 만든다.
+        createProgressDialog();
         onLoadOnce();
     }
 
@@ -105,5 +110,34 @@ public class BaseFragment extends Fragment {
     }
 
     protected void onUpdateUI() {
+    }
+
+
+    /**
+     * 프로그래스 다이얼로그를 만든다.
+     */
+    protected void createProgressDialog() {
+        mProgressDlg = new ProgressDialog(mContext);
+        mProgressDlg.setProgress(ProgressDialog.STYLE_SPINNER);
+        mProgressDlg.setCancelable(false);
+    }
+
+    /**
+     * 프로그레스 다이얼로그를 보여준다.
+     */
+    protected final void showProgressDialog() {
+        showProgressDialog("로딩중입니다..");
+    }
+
+    /**
+     * 프로그래스 다이얼로그를 가린다.
+     */
+    protected final void hideProgressDialog() {
+        mProgressDlg.hide();
+    }
+
+    protected final void showProgressDialog(String message) {
+        mProgressDlg.setMessage(message);
+        mProgressDlg.show();
     }
 }

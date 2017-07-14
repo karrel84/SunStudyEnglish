@@ -21,5 +21,9 @@ public interface GetWordPresenter {
         void startOcrActivity();
 
         void addWordItem(WordItem item);
+
+        void showProgress();
+
+        void hideProgress();
     }
 }
