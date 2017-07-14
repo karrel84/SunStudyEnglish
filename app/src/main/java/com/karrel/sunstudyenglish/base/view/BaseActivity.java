@@ -1,8 +1,7 @@
-package com.karrel.sunstudyenglish.base;
+package com.karrel.sunstudyenglish.base.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;

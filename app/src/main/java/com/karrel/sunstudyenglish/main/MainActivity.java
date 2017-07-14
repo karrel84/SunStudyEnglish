@@ -14,7 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.karrel.sunstudyenglish.R;
-import com.karrel.sunstudyenglish.main.gettheword.FragmentGetWord;
+import com.karrel.sunstudyenglish.main.gettheword.view.FragmentGetWord;
 import com.karrel.sunstudyenglish.main.wordbook.FragmentWordBook;
 
 public class MainActivity extends AppCompatActivity

@@ -3,17 +3,13 @@
     package="com.karrel.sunstudyenglish">
 
     <application
+        android:name=".base.view.BaseApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".main.MainActivity3" />
-        <activity android:name=".FireBaseActivity"></activity>
-        <activity
-            android:name=".main.Main2Activity"
-            android:label="@string/title_activity_main2"
-            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".FireBaseActivity" />
         <activity
             android:name=".main.MainActivity"
             android:label="@string/title_activity_main"
