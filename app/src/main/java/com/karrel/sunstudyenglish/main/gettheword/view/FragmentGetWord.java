@@ -16,7 +16,7 @@ import com.karrel.sunstudyenglish.databinding.FragmentGetWordBinding;
 import com.karrel.sunstudyenglish.main.gettheword.model.WordItem;
 import com.karrel.sunstudyenglish.main.gettheword.presenter.GetWordPresenter;
 import com.karrel.sunstudyenglish.main.gettheword.presenter.GetWordPresenterImpl;
-import com.kerrel.getthewordlibrary.OcrCaptureActivity;
+import com.karrel.sunstudyenglish.main.ocr.OcrCaptureActivity;
 
 import java.util.ArrayList;
 

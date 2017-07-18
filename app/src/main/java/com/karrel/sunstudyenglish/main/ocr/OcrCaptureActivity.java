@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.kerrel.getthewordlibrary;
+package com.karrel.sunstudyenglish.main.ocr;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -42,9 +42,10 @@ import android.widget.Toast;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.text.TextRecognizer;
-import com.kerrel.getthewordlibrary.camera.CameraSource;
-import com.kerrel.getthewordlibrary.camera.CameraSourcePreview;
-import com.kerrel.getthewordlibrary.camera.GraphicOverlay;
+import com.karrel.sunstudyenglish.R;
+import com.karrel.sunstudyenglish.main.ocr.camera.CameraSource;
+import com.karrel.sunstudyenglish.main.ocr.camera.CameraSourcePreview;
+import com.karrel.sunstudyenglish.main.ocr.camera.GraphicOverlay;
 
 import java.io.IOException;
 import java.util.ArrayList;

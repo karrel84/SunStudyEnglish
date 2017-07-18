@@ -40,10 +40,10 @@ android {
         sourceCompatibility 1.8
     }
 }
-apply plugin: 'com.google.gms.google-services'
 
 dependencies {
-    compile project(path: ':lib_gettheword')
+    compile 'com.google.android.gms:play-services:11.0.1'
+
     compile fileTree(include: ['*.jar'], dir: 'libs')
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'

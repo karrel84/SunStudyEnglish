@@ -6,17 +6,17 @@
     android:layout_height="match_parent"
     android:keepScreenOn="true">
 
-    <com.kerrel.getthewordlibrary.camera.CameraSourcePreview
+    <com.karrel.sunstudyenglish.main.ocr.camera.CameraSourcePreview
         android:id="@+id/preview"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <com.kerrel.getthewordlibrary.camera.GraphicOverlay
+        <com.karrel.sunstudyenglish.main.ocr.camera.GraphicOverlay
             android:id="@+id/graphicOverlay"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-    </com.kerrel.getthewordlibrary.camera.CameraSourcePreview>
+    </com.karrel.sunstudyenglish.main.ocr.camera.CameraSourcePreview>
 
 
     <android.support.design.widget.FloatingActionButton

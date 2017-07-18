@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.kerrel.getthewordlibrary.camera;
+package com.karrel.sunstudyenglish.main.ocr.camera;
 
 import android.Manifest;
 import android.content.Context;
