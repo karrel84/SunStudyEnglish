@@ -2,12 +2,16 @@ package com.karrel.sunstudyenglish.main.wordbook;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -15,14 +19,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.karrel.sunstudyenglish.R;
 import com.karrel.sunstudyenglish.databinding.FragmentFragmentWordBookBinding;
+import com.karrel.sunstudyenglish.main.wordbook.test.User;
 
 public class FragmentWordBook extends Fragment {
 
     private final String TAG = "FragmentWordBook";
     private FragmentFragmentWordBookBinding mBinding;
+    private FirebaseDatabase mFireDatabase;
+    private DatabaseReference mDatabaseReference;
 
     public FragmentWordBook() {
-        // Required empty public constructor
+
     }
 
     @Override
@@ -44,52 +51,34 @@ public class FragmentWordBook extends Fragment {
      */
     private void testFireBase() {
         Log.d(TAG, ":: testFireBase");
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("message");
-        myRef.setValue("my message!! ");
+        mFireDatabase = FirebaseDatabase.getInstance();
+        mDatabaseReference = mFireDatabase.getReference("message2");
+        mDatabaseReference.setValue("Hello, World!");
 
+        Log.d("TAG", "mFireDatabase.toString() > " + mFireDatabase.toString());
 
-        myRef.child("users").child("1234").addListenerForSingleValueEvent(new ValueEventListener() {
+        // Read from the database
+        mDatabaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(TAG, ":: onDataChange");
-                Object obj = dataSnapshot.getValue();
-                if (obj != null) {
-                    Log.d(TAG, "obj -> " + obj.toString());
-                }
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                Log.d(TAG, "Value is: " + dataSnapshot.getValue());
             }
 
             @Override
-            public void onCancelled(DatabaseError databaseError) {
-
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
 
-        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                Log.d(TAG, ":: onDataChange");
-                Object obj = dataSnapshot.getValue();
-                Log.d(TAG, "obj -> " + obj.toString());
-            }
+        writeNewUser("hello", "rell", "rell@naver.com");
+    }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
+    private void writeNewUser(String userId, String name, String email) {
+        User user = new User(name, email);
 
-            }
-        });
-
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-//                dataSnapshot.getValue(String.class)
-//                Log.d(TAG, "value -> " + dataSnapshot.getValue().toString());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.w(TAG, "Failed to read value.", databaseError.toException());
-            }
-        });
+        mDatabaseReference.child("users").child(userId).setValue(user).addOnCompleteListener(getActivity(), task -> Log.e(TAG, "onComplete"));
     }
 }

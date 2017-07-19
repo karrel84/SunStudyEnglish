@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.support.multidex.MultiDex;
 
+import com.google.firebase.FirebaseApp;
+
 /**
  * Created by rell on 2017-07-14.
  */
