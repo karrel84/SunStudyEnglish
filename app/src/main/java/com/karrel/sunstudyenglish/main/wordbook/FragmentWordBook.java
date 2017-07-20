@@ -2,16 +2,14 @@ package com.karrel.sunstudyenglish.main.wordbook;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,8 +23,8 @@ public class FragmentWordBook extends Fragment {
 
     private final String TAG = "FragmentWordBook";
     private FragmentFragmentWordBookBinding mBinding;
-    private FirebaseDatabase mFireDatabase;
-    private DatabaseReference mDatabaseReference;
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
 
     public FragmentWordBook() {
 
@@ -40,45 +38,96 @@ public class FragmentWordBook extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_fragment_word_book, container, false);
-        // 파이어베이스 액티비티로 이동
-        mBinding.firebase.setOnClickListener(v -> testFireBase());
+
+        // 파이어베이스
+        mDatabase = FirebaseDatabase.getInstance();
+        mReference = mDatabase.getReference();
+        mReference.addChildEventListener(mChildEventListener);
+        mReference.addListenerForSingleValueEvent(mSingeValueEventListener);
+        mReference.addValueEventListener(mValueEventListener);
+
+        // test firebase 1
+        mBinding.firebase.setOnClickListener(v -> intputData());
         return mBinding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
     }
 
     /**
      * //     * 파이어베이스를 테스트 하자
      * //
      */
-    private void testFireBase() {
-        Log.d(TAG, ":: testFireBase");
-        mFireDatabase = FirebaseDatabase.getInstance();
-        mDatabaseReference = mFireDatabase.getReference("message2");
-        mDatabaseReference.setValue("Hello, World!");
-
-        Log.d("TAG", "mFireDatabase.toString() > " + mFireDatabase.toString());
-
-        // Read from the database
-        mDatabaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                // This method is called once with the initial value and again
-                // whenever data at this location is updated.
-                Log.d(TAG, "Value is: " + dataSnapshot.getValue());
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.w(TAG, "Failed to read value.", error.toException());
-            }
-        });
-
-        writeNewUser("hello", "rell", "rell@naver.com");
+    private void intputData() {
+        mReference.setValue("hello", "Hello, firebase!");
+        mReference.push();
     }
 
     private void writeNewUser(String userId, String name, String email) {
         User user = new User(name, email);
 
-        mDatabaseReference.child("users").child(userId).setValue(user).addOnCompleteListener(getActivity(), task -> Log.e(TAG, "onComplete"));
+        mReference.child("users").child(userId).setValue(user).addOnCompleteListener(getActivity(), task -> Log.e(TAG, "onComplete"));
     }
+
+    private ChildEventListener mChildEventListener = new ChildEventListener() {
+        @Override
+        public void onChildAdded(DataSnapshot dataSnapshot, String s) {
+            Log.e(TAG, "ChildEventListener");
+            Log.d(TAG, "onChildAdded > " + s);
+        }
+
+        @Override
+        public void onChildChanged(DataSnapshot dataSnapshot, String s) {
+            Log.e(TAG, "ChildEventListener");
+            Log.d(TAG, "onChildChanged > " + s);
+        }
+
+        @Override
+        public void onChildRemoved(DataSnapshot dataSnapshot) {
+            Log.e(TAG, "ChildEventListener");
+            Log.d(TAG, "onChildRemoved");
+        }
+
+        @Override
+        public void onChildMoved(DataSnapshot dataSnapshot, String s) {
+            Log.e(TAG, "ChildEventListener");
+            Log.d(TAG, "onChildMoved > " + s);
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            Log.e(TAG, "ChildEventListener");
+            Log.d(TAG, "onCancelled > ");
+        }
+    };
+
+    private ValueEventListener mSingeValueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            Log.e(TAG, "ValueEventListener");
+            Log.d(TAG, "onDataChange > ");
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            Log.e(TAG, "ValueEventListener");
+            Log.d(TAG, "onCancelled > ");
+        }
+    };
+
+    private ValueEventListener mValueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            Log.e(TAG, "ValueEventListener");
+            Log.d(TAG, "onDataChange > " + dataSnapshot.toString());
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+            Log.e(TAG, "ValueEventListener");
+            Log.d(TAG, "onCancelled > ");
+        }
+    };
 }
