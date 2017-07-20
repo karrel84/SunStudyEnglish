@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.karrel.sunstudyenglish.R;
 import com.karrel.sunstudyenglish.base.view.BaseFragment;
 import com.karrel.sunstudyenglish.common.RequestCodes;
@@ -17,6 +19,7 @@ import com.karrel.sunstudyenglish.main.gettheword.model.WordItem;
 import com.karrel.sunstudyenglish.main.gettheword.presenter.GetWordPresenter;
 import com.karrel.sunstudyenglish.main.gettheword.presenter.GetWordPresenterImpl;
 import com.karrel.sunstudyenglish.main.ocr.OcrCaptureActivity;
+import com.karrel.sunstudyenglish.main.wordbook.test.User;
 
 import java.util.ArrayList;
 
@@ -29,11 +32,19 @@ public class FragmentGetWord extends BaseFragment {
     private GetWordPresenter mPresenter;
     private RecyclerAdapter mAdapter;
 
+    private FirebaseDatabase mDatabase;
+    private DatabaseReference mReference;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // data binding
         mBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_get_word, container, false);
+
+        // 파이어베이스
+        mDatabase = FirebaseDatabase.getInstance();
+        mReference = mDatabase.getReference();
+
         return mBinding.getRoot();
     }
 
@@ -83,6 +94,8 @@ public class FragmentGetWord extends BaseFragment {
         @Override
         public void addWordItem(WordItem item) {
             Log.e(TAG, item.toString());
+            addWord(item);
+
             // 아답터에 넣어줘라
             mAdapter.addItem(item);
             // 제일 하단으로 이동
@@ -99,4 +112,15 @@ public class FragmentGetWord extends BaseFragment {
             hideProgressDialog();
         }
     };
+
+    private void addWord(WordItem item) {
+        mReference.child("words").child(item.word).setValue(item);
+        mReference.child("users").child("karrel84").setValue(item.word);
+    }
+
+    private void writeNewUser(String userId, String name, String email) {
+        User user = new User(name, email);
+
+        mReference.child("users").child(userId).setValue(user).addOnCompleteListener(getActivity(), task -> Log.e(TAG, "onComplete"));
+    }
 }

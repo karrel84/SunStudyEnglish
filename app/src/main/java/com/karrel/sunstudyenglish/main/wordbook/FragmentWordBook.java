@@ -61,8 +61,12 @@ public class FragmentWordBook extends Fragment {
      * //
      */
     private void intputData() {
-        mReference.setValue("hello", "Hello, firebase!");
-        mReference.push();
+//        mReference.setValue("hello23984", "Hello, firebase!");
+//        mReference.push();
+        writeNewUser("karrel", "이주영", "karrel84@naver.com");
+        writeNewUser("karrel2", "이주영2", "karrel84@naver.com2");
+        writeNewUser("karrel3", "이주영3", "karrel84@naver.com3");
+        writeNewUser("karrel4", "이주영4", "karrel84@naver.com4");
     }
 
     private void writeNewUser(String userId, String name, String email) {
