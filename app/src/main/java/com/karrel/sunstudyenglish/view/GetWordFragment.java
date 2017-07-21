@@ -9,8 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
+import com.google.firebase.database.ValueEventListener;
 import com.karrel.sunstudyenglish.R;
 import com.karrel.sunstudyenglish.model.RequestCodes;
 import com.karrel.sunstudyenglish.databinding.FragmentGetWordBinding;
@@ -23,7 +28,9 @@ import com.karrel.sunstudyenglish.view.test.User;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -65,6 +72,28 @@ public class GetWordFragment extends BaseFragment {
         // 리사이클러뷰 초기화
         setupRecyclerView();
 
+        mReference.child("user-posts").child("karrelqwe").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Log.e(TAG, "onDataChange > " + dataSnapshot);
+
+                Iterable<DataSnapshot> dataSnapshots = dataSnapshot.getChildren();
+
+                Iterator<DataSnapshot> iterator = dataSnapshots.iterator();
+
+                while (iterator.hasNext()) {
+                    Log.e(TAG, "iterator.next() > " + iterator.next());
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        Log.e(TAG, " mReference.getKey() > " + mReference.child("posts").getKey());
+
         // TODO test code
         mBinding.addUser.setOnClickListener(v -> writeNewUser("karrel", "이주영", "karrel84@naver.com"));
         // TODO test code
@@ -73,6 +102,46 @@ public class GetWordFragment extends BaseFragment {
         // TODO test code
         // 데이터추가
         mBinding.addDataList.setOnClickListener(v -> writeNewPost("karrel", "이주영", "타이틀입니다.", "내용입니다."));
+        // TODO test
+        // 데이터 삭제
+        mBinding.deleteData.setOnClickListener(v -> mReference.child("posts").removeValue());
+
+        // TODO test
+        mBinding.transactionSave.setOnClickListener(v -> onStarClicked(mReference));
+    }
+
+    // TODO test
+    private void onStarClicked(DatabaseReference postRef) {
+        postRef.runTransaction(new Transaction.Handler() {
+            @Override
+            public Transaction.Result doTransaction(MutableData mutableData) {
+                Post p = mutableData.getValue(Post.class);
+                if (p == null) {
+                    return Transaction.success(mutableData);
+                }
+
+                if (p.stars.containsKey(getUid())) {
+                    // Unstar the post and remove self from stars
+                    p.starCount = p.starCount - 1;
+                    p.stars.remove(getUid());
+                } else {
+                    // Star the post and add self to stars
+                    p.starCount = p.starCount + 1;
+                    p.stars.put(getUid(), true);
+                }
+
+                // Set value and report transaction success
+                mutableData.setValue(p);
+                return Transaction.success(mutableData);
+            }
+
+            @Override
+            public void onComplete(DatabaseError databaseError, boolean b,
+                                   DataSnapshot dataSnapshot) {
+                // Transaction completed
+                Log.d(TAG, "postTransaction:onComplete:" + databaseError);
+            }
+        });
     }
 
     // TODO testCode
@@ -158,5 +227,9 @@ public class GetWordFragment extends BaseFragment {
     private void addWord(WordItem item) {
         mReference.child("words").child(item.word).setValue(item);
         mReference.child("users").child("karrel84").setValue(item.word);
+    }
+
+    public String getUid() {
+        return "karrel8410";
     }
 }
