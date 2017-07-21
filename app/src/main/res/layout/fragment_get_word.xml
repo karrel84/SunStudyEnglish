@@ -6,7 +6,31 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@android:color/white"
-        tools:context="com.karrel.sunstudyenglish.main.gettheword.view.FragmentGetWord">
+        tools:context="com.karrel.sunstudyenglish.view.GetWordFragment">
+
+        <Button
+            android:id="@+id/addUser"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="사용자 추가" />
+
+        <Button
+            android:id="@+id/updateName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="이름 변경"
+            app:layout_constraintLeft_toRightOf="@+id/addUser"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/addDataList"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:text="데이터 목록에 추가"
+            app:layout_constraintLeft_toRightOf="@+id/updateName"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerView"
