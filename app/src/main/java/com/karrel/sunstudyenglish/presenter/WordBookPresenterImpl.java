@@ -43,8 +43,9 @@ public class WordBookPresenterImpl implements WordBookPresenter {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 System.out.println("onDataChange > " + dataSnapshot.getValue());
                 Log.e(TAG, "onDataChange > " + dataSnapshot.getValue());
-                List<WordItem> items = (List<WordItem>) dataSnapshot.getValue();
-                Log.e(TAG, "onDataChange > " + items);
+
+                Log.d(TAG, "dataSnapshot.getKey()> " + dataSnapshot.getKey());
+
             }
 
             @Override

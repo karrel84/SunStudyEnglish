@@ -1,4 +1,4 @@
-package com.karrel.sunstudyenglish.view;
+package com.karrel.sunstudyenglish.view.activity;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -14,6 +14,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.karrel.sunstudyenglish.R;
+import com.karrel.sunstudyenglish.view.fragment.WordBookFragment;
+import com.karrel.sunstudyenglish.view.fragment.GetWordFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {

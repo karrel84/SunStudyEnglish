@@ -1,4 +1,4 @@
-package com.karrel.sunstudyenglish.view;
+package com.karrel.sunstudyenglish.view.adapter.holder;
 
 import android.support.v7.widget.RecyclerView;
 

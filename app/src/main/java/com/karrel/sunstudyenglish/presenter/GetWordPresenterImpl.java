@@ -43,6 +43,7 @@ public class GetWordPresenterImpl implements GetWordPresenter {
 
         mView.showProgress();
 
+        ArrayList<WordItem> wordItems = new ArrayList<>();
         getWord(wordsList)
                 .subscribeOn(Schedulers.io()) // 작업은 비동기 스레드에서
                 .observeOn(AndroidSchedulers.mainThread()) // UI작업은 메인스레드에서
@@ -50,6 +51,8 @@ public class GetWordPresenterImpl implements GetWordPresenter {
                     @Override
                     public void onCompleted() {
                         mView.hideProgress();
+                        mView.onCompleted(wordItems);
+
                     }
 
                     @Override
@@ -59,6 +62,7 @@ public class GetWordPresenterImpl implements GetWordPresenter {
                     @Override
                     public void onNext(WordItem wordItem) {
                         mView.addWordItem(wordItem);
+                        wordItems.add(wordItem);
                     }
                 });
     }

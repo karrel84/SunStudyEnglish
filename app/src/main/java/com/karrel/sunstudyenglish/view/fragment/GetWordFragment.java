@@ -1,4 +1,4 @@
-package com.karrel.sunstudyenglish.view;
+package com.karrel.sunstudyenglish.view.fragment;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
@@ -17,20 +17,24 @@ import com.google.firebase.database.MutableData;
 import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
 import com.karrel.sunstudyenglish.R;
+import com.karrel.sunstudyenglish.base.BaseFragment;
 import com.karrel.sunstudyenglish.model.RequestCodes;
 import com.karrel.sunstudyenglish.databinding.FragmentGetWordBinding;
 import com.karrel.sunstudyenglish.model.WordItem;
 import com.karrel.sunstudyenglish.presenter.GetWordPresenter;
 import com.karrel.sunstudyenglish.presenter.GetWordPresenterImpl;
 import com.karrel.sunstudyenglish.ocr.OcrCaptureActivity;
+import com.karrel.sunstudyenglish.view.adapter.RecyclerAdapter;
 import com.karrel.sunstudyenglish.view.test.Post;
 import com.karrel.sunstudyenglish.view.test.User;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.function.Consumer;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -222,7 +226,25 @@ public class GetWordFragment extends BaseFragment {
         public void hideProgress() {
             hideProgressDialog();
         }
+
+        @Override
+        public void onCompleted(ArrayList<WordItem> wordItems) {
+            // todo 검색완료가 되었습니다 리스트를 받아가세요.
+            saveListToServer(wordItems);
+        }
     };
+
+    // todo 서버에 리스트를 저장해볼까요
+    private void saveListToServer(ArrayList<WordItem> wordItems) {
+
+        StringBuilder builder = new StringBuilder();
+        for (WordItem item : wordItems) {
+            if (!builder.toString().isEmpty()) builder.append("|");
+            builder.append(item.word);
+        }
+
+        mReference.child("users").child("karrel").child("words").child(getTime()).setValue(builder.toString());
+    }
 
     private void addWord(WordItem item) {
         mReference.child("words").child(item.word).setValue(item);
@@ -231,5 +253,10 @@ public class GetWordFragment extends BaseFragment {
 
     public String getUid() {
         return "karrel8410";
+    }
+
+    public String getTime() {
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return format.format(new Date(System.currentTimeMillis()));
     }
 }

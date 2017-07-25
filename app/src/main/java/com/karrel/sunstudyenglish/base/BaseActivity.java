@@ -1,4 +1,4 @@
-package com.karrel.sunstudyenglish.view;
+package com.karrel.sunstudyenglish.base;
 
 import android.content.Context;
 import android.os.Bundle;

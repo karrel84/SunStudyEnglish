@@ -25,5 +25,7 @@ public interface GetWordPresenter {
         void showProgress();
 
         void hideProgress();
+
+        void onCompleted(ArrayList<WordItem> wordItems);
     }
 }

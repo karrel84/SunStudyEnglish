@@ -1,4 +1,4 @@
-package com.karrel.sunstudyenglish.view;
+package com.karrel.sunstudyenglish.view.adapter;
 
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import com.karrel.sunstudyenglish.R;
 import com.karrel.sunstudyenglish.databinding.ItemWordBinding;
 import com.karrel.sunstudyenglish.model.WordItem;
+import com.karrel.sunstudyenglish.view.adapter.holder.WordViewHolder;
 
 import java.util.ArrayList;
 import java.util.List;
