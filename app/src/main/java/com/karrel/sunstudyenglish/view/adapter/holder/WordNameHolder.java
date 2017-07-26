@@ -6,14 +6,14 @@ import com.karrel.sunstudyenglish.databinding.ItemWordBinding;
 import com.karrel.sunstudyenglish.model.WordItem;
 
 /**
- * Created by 이주영 on 2017-06-21.
+ * Created by bodyfriend_dev on 2017. 7. 26..
  */
 
-public class WordViewHolder extends RecyclerView.ViewHolder {
+public class WordNameHolder extends RecyclerView.ViewHolder {
     private final ItemWordBinding mBinding;
     private WordItem data;
 
-    public WordViewHolder(ItemWordBinding binding) {
+    public WordNameHolder(ItemWordBinding binding) {
         super(binding.getRoot());
         mBinding = binding;
     }

@@ -247,8 +247,8 @@ public class GetWordFragment extends BaseFragment {
     }
 
     private void addWord(WordItem item) {
-        mReference.child("words").child(item.word).setValue(item);
-        mReference.child("users").child("karrel84").setValue(item.word);
+//        mReference.child("words").child(item.word).setValue(item);
+//        mReference.child("users").child("karrel84").setValue(item.word);
     }
 
     public String getUid() {

@@ -24,7 +24,7 @@ public class WordBookFragmentTest implements WordBookPresenter.View {
 
     @Test
     public void onLoad() {
-        mPresenter.getWord();
+        mPresenter.getGroupName();
     }
 
     @Override

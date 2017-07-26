@@ -1,5 +1,6 @@
 package com.karrel.sunstudyenglish.presenter;
 
+import com.karrel.sunstudyenglish.model.GroupItem;
 import com.karrel.sunstudyenglish.model.WordItem;
 
 import java.util.List;
@@ -11,10 +12,12 @@ import java.util.List;
 public interface WordBookPresenter {
     void setView(WordBookPresenter.View view);
 
-    void getWord();
+    void getGroupName();
+
+    void onDestroy();
 
     interface View {
 
-        void showList(List<WordItem> list);
+        void setonGroupListItems(List<GroupItem> list);
     }
 }

@@ -11,8 +11,6 @@ import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.*;
-
 /**
  * Created by rell on 2017-07-21.
  */
@@ -29,7 +27,7 @@ public class WordBookFragmentTest implements WordBookPresenter.View {
 
     @Test
     public void onLoad() throws Exception {
-        mPresenter.getWord();
+        mPresenter.getGroupName();
 
         mLatch.await(10 * 1000, TimeUnit.MILLISECONDS);
     }

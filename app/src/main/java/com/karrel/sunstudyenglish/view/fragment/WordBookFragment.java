@@ -10,10 +10,11 @@ import android.view.ViewGroup;
 import com.karrel.sunstudyenglish.R;
 import com.karrel.sunstudyenglish.base.BaseFragment;
 import com.karrel.sunstudyenglish.databinding.FragmentFragmentWordBookBinding;
+import com.karrel.sunstudyenglish.model.GroupItem;
 import com.karrel.sunstudyenglish.model.WordItem;
 import com.karrel.sunstudyenglish.presenter.WordBookPresenter;
 import com.karrel.sunstudyenglish.presenter.WordBookPresenterImpl;
-import com.karrel.sunstudyenglish.view.adapter.RecyclerAdapter;
+import com.karrel.sunstudyenglish.view.adapter.GroupNameAdapter;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class WordBookFragment extends BaseFragment implements WordBookPresenter.
     private final String TAG = "WordBookFragment";
     private FragmentFragmentWordBookBinding mBinding;
     private WordBookPresenter mPresenter;
-    private RecyclerAdapter mAdapter;
+    private GroupNameAdapter mAdapter;
 
     public WordBookFragment() {
 
@@ -52,7 +53,7 @@ public class WordBookFragment extends BaseFragment implements WordBookPresenter.
         mPresenter.setView(this);
 
         // 리사이클러 초기화
-        mAdapter = new RecyclerAdapter();
+        mAdapter = new GroupNameAdapter();
         mBinding.recycler.setAdapter(mAdapter);
         mBinding.recycler.setLayoutManager(new LinearLayoutManager(mContext));
 
@@ -62,11 +63,17 @@ public class WordBookFragment extends BaseFragment implements WordBookPresenter.
     protected void onLoad() {
         super.onLoad();
 
-        mPresenter.getWord();
+        mPresenter.getGroupName();
     }
 
     @Override
-    public void showList(List<WordItem> list) {
-        mAdapter.setItems(list);
+    public void onDestroy() {
+        super.onDestroy();
+        mPresenter.onDestroy();
+    }
+
+    @Override
+    public void setonGroupListItems(List<GroupItem> list) {
+        mAdapter.setGroupItems(list);
     }
 }

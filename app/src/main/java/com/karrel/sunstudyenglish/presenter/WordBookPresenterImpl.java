@@ -8,7 +8,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.karrel.sunstudyenglish.model.WordItem;
+import com.karrel.sunstudyenglish.model.GroupItem;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,10 +22,13 @@ public class WordBookPresenterImpl implements WordBookPresenter {
     private static final String TAG = "WordBookPresenterImpl";
     private final FirebaseDatabase mDatabase;
     private WordBookPresenter.View mView;
+    private DatabaseReference mReference;
+    private Query mQuery;
 
     public WordBookPresenterImpl() {
         // 파이어베이스 초기화
         mDatabase = FirebaseDatabase.getInstance();
+        mReference = mDatabase.getReference();
     }
 
     @Override
@@ -34,37 +37,44 @@ public class WordBookPresenterImpl implements WordBookPresenter {
     }
 
     @Override
-    public void getWord() {
-        DatabaseReference reference = mDatabase.getReference();
-
-        Query query = reference.child("words");
-        query.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                System.out.println("onDataChange > " + dataSnapshot.getValue());
-                Log.e(TAG, "onDataChange > " + dataSnapshot.getValue());
-
-                Log.d(TAG, "dataSnapshot.getKey()> " + dataSnapshot.getKey());
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-                Log.e(TAG, "onCancelled > " + databaseError.toString());
-            }
-        });
-//
-//        List<WordItem> list = getTheWord();
-//        mView.showList(list);
+    public void getGroupName() {
+        removeEventListeners();
+        mQuery = mReference.child("users").child("karrel").child("words");
+        mQuery.addValueEventListener(onGroupValueEventListener);
     }
 
-    private List<WordItem> getTheWord() {
-        // TODO 파이어베이스에서 아이템을 가져와야지
-        List<WordItem> list = new ArrayList<>();
-        list.add(new WordItem("hello", "안녕"));
-        list.add(new WordItem("korea", "한국"));
-        list.add(new WordItem("china", "중국"));
-        list.add(new WordItem("japen", "일본"));
-        return list;
+    @Override
+    public void onDestroy() {
+        removeEventListeners();
     }
+
+    /**
+     * 이벤트를 삭제하자
+     */
+    private void removeEventListeners() {
+        if (mQuery != null) {
+            mQuery.removeEventListener(onGroupValueEventListener);
+        }
+    }
+
+    private final ValueEventListener onGroupValueEventListener = new ValueEventListener() {
+        @Override
+        public void onDataChange(DataSnapshot dataSnapshot) {
+            Iterable<DataSnapshot> iterable = dataSnapshot.getChildren();
+            List<GroupItem> list = new ArrayList<>();
+            for (DataSnapshot snapshot : iterable) {
+                Log.e(TAG, "getKey > " + snapshot.getKey());
+                Log.e(TAG, "getValue > " + snapshot.getValue());
+                GroupItem item = new GroupItem(snapshot.getKey(), snapshot.getValue().toString());
+                list.add(item);
+            }
+
+            mView.setonGroupListItems(list);
+        }
+
+        @Override
+        public void onCancelled(DatabaseError databaseError) {
+
+        }
+    };
 }

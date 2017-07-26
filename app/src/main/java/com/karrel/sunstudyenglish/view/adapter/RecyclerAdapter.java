@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import com.karrel.sunstudyenglish.R;
 import com.karrel.sunstudyenglish.databinding.ItemWordBinding;
 import com.karrel.sunstudyenglish.model.WordItem;
-import com.karrel.sunstudyenglish.view.adapter.holder.WordViewHolder;
+import com.karrel.sunstudyenglish.view.adapter.holder.GroupNameHolder;
+import com.karrel.sunstudyenglish.view.adapter.holder.WordNameHolder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +18,7 @@ import java.util.List;
  * Created by 이주영 on 2017-06-21.
  */
 
-public class RecyclerAdapter extends RecyclerView.Adapter<WordViewHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter<WordNameHolder> {
     private List<WordItem> items;
 
     public RecyclerAdapter() {
@@ -25,14 +26,14 @@ public class RecyclerAdapter extends RecyclerView.Adapter<WordViewHolder> {
     }
 
     @Override
-    public WordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public WordNameHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ItemWordBinding binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_word, parent, false);
-        WordViewHolder holder = new WordViewHolder(binding);
+        WordNameHolder holder = new WordNameHolder(binding);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(WordViewHolder holder, int position) {
+    public void onBindViewHolder(WordNameHolder holder, int position) {
         holder.setData(items.get(position));
     }
 
