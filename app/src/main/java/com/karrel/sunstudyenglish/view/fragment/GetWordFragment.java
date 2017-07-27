@@ -24,13 +24,12 @@ import com.karrel.sunstudyenglish.model.WordItem;
 import com.karrel.sunstudyenglish.presenter.GetWordPresenter;
 import com.karrel.sunstudyenglish.presenter.GetWordPresenterImpl;
 import com.karrel.sunstudyenglish.ocr.OcrCaptureActivity;
-import com.karrel.sunstudyenglish.view.adapter.RecyclerAdapter;
+import com.karrel.sunstudyenglish.view.adapter.WordAdapter;
 import com.karrel.sunstudyenglish.view.test.Post;
 import com.karrel.sunstudyenglish.view.test.User;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -43,7 +42,7 @@ public class GetWordFragment extends BaseFragment {
 
     private FragmentGetWordBinding mBinding;
     private GetWordPresenter mPresenter;
-    private RecyclerAdapter mAdapter;
+    private WordAdapter mAdapter;
 
     private FirebaseDatabase mDatabase;
     private DatabaseReference mReference;
@@ -194,7 +193,7 @@ public class GetWordFragment extends BaseFragment {
      * 리사이클러뷰 초기화
      */
     private void setupRecyclerView() {
-        mAdapter = new RecyclerAdapter();
+        mAdapter = new WordAdapter();
         mBinding.recyclerView.setAdapter(mAdapter);
         mBinding.recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
     }
@@ -247,7 +246,7 @@ public class GetWordFragment extends BaseFragment {
     }
 
     private void addWord(WordItem item) {
-//        mReference.child("words").child(item.word).setValue(item);
+        mReference.child("words").child(item.word).setValue(item);
 //        mReference.child("users").child("karrel84").setValue(item.word);
     }
 

@@ -31,12 +31,11 @@ public class GroupNameAdapter extends RecyclerView.Adapter<GroupNameHolder> {
     @Override
     public void onBindViewHolder(GroupNameHolder holder, int position) {
         holder.setData(groupItems.get(position));
-
     }
 
     @Override
     public int getItemCount() {
-        if(groupItems == null){
+        if (groupItems == null) {
             return 0;
         }
         return groupItems.size();
@@ -45,9 +44,5 @@ public class GroupNameAdapter extends RecyclerView.Adapter<GroupNameHolder> {
     public void setGroupItems(List<GroupItem> groupItems) {
         this.groupItems = groupItems;
         notifyDataSetChanged();
-    }
-
-    public List<GroupItem> getGroupItems() {
-        return groupItems;
     }
 }

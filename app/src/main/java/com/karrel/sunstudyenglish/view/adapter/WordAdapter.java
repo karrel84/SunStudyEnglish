@@ -18,10 +18,10 @@ import java.util.List;
  * Created by 이주영 on 2017-06-21.
  */
 
-public class RecyclerAdapter extends RecyclerView.Adapter<WordNameHolder> {
+public class WordAdapter extends RecyclerView.Adapter<WordNameHolder> {
     private List<WordItem> items;
 
-    public RecyclerAdapter() {
+    public WordAdapter() {
         items = new ArrayList<>();
     }
 

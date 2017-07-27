@@ -24,10 +24,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".ocr.OcrCaptureActivity"
             android:label="Read Text" />
+        <activity android:name=".view.activity.MemorizeActivity"></activity>
     </application>
 
 </manifest>
