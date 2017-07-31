@@ -1,5 +1,6 @@
 package com.karrel.sunstudyenglish.main.wordbook.view;
 
+import com.karrel.sunstudyenglish.model.GroupItem;
 import com.karrel.sunstudyenglish.model.WordItem;
 import com.karrel.sunstudyenglish.presenter.WordBookPresenter;
 import com.karrel.sunstudyenglish.presenter.WordBookPresenterImpl;
@@ -28,11 +29,7 @@ public class WordBookFragmentTest implements WordBookPresenter.View {
     }
 
     @Override
-    public void showList(List<WordItem> list) {
-        System.out.println("showList");
+    public void setonGroupListItems(List<GroupItem> list) {
 
-        for (WordItem item : list) {
-            System.out.println("item > " + item.toString());
-        }
     }
 }

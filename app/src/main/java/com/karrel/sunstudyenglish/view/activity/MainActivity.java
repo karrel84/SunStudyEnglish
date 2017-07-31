@@ -1,6 +1,8 @@
 package com.karrel.sunstudyenglish.view.activity;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -17,8 +19,7 @@ import com.karrel.sunstudyenglish.R;
 import com.karrel.sunstudyenglish.view.fragment.WordBookFragment;
 import com.karrel.sunstudyenglish.view.fragment.GetWordFragment;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,97 +27,10 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
         // 타이틀을 세팅한다
-        Toolbar toolbar = setupTitle();
+        setupTitle();
 
-        // 좌측 슬라이드 메뉴를 세팅하자
-        setupLeftDrawer(toolbar);
-
-    }
-
-    /**
-     * 뒤로가기
-     */
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
-    }
-
-    /**
-     * 옵션메뉴를 만든다.
-     */
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main, menu);
-        return true;
-    }
-
-    /**
-     * 타이틀바 메뉴 옵션
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * 테비게이션아이템이 선택되면 이 메소드가 호출된다.
-     *
-     * @param item
-     * @return
-     */
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        Fragment fragment = null;
-        if (id == R.id.nav_wordbook) {
-            fragment = new WordBookFragment();
-        } else if (id == R.id.nav_getword) {
-            fragment = new GetWordFragment();
-        }
-        if (fragment != null) {
-            changeFragment(fragment);
-        }
-
-        closeDrawer();
-        return true;
-    }
-
-    /**
-     * 좌측 메뉴 닫자
-     */
-    private void closeDrawer() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-    }
-
-    /**
-     * 좌측 슬라이드 메뉴를 세팅하자
-     *
-     * @param toolbar
-     */
-    private void setupLeftDrawer(Toolbar toolbar) {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        // 하단메뉴 세팅
+        setupBottomMenu();
     }
 
     /**
@@ -128,11 +42,54 @@ public class MainActivity extends AppCompatActivity
         return toolbar;
     }
 
+    /**
+     * 플래그먼트를 변경한다
+     *
+     * @param fragment
+     */
     public void changeFragment(Fragment fragment) {
         // 최초 플래그먼트를 설정한다.
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fm.beginTransaction();
         fragmentTransaction.replace(R.id.fragment, fragment);
         fragmentTransaction.commit();
+    }
+
+    /**
+     * 하단메뉴
+     */
+    private void setupBottomMenu() {
+        final BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+
+    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+            = item -> {
+        Fragment fragment = null;
+        switch (item.getItemId()) {
+
+            case R.id.navigation_home:
+                fragment = new WordBookFragment();
+                break;
+            case R.id.navigation_dashboard:
+                fragment = new GetWordFragment();
+                break;
+            case R.id.navigation_notifications:
+                break;
+
+        }
+
+        if (fragment != null) {
+            changeFragment(fragment);
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+
+    @Override
+    public void onBackPressed() {
     }
 }

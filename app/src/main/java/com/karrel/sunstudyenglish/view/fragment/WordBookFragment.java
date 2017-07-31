@@ -3,9 +3,12 @@ package com.karrel.sunstudyenglish.view.fragment;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.karrel.sunstudyenglish.R;
 import com.karrel.sunstudyenglish.base.BaseFragment;
@@ -57,6 +60,9 @@ public class WordBookFragment extends BaseFragment implements WordBookPresenter.
         mBinding.recycler.setAdapter(mAdapter);
         mBinding.recycler.setLayoutManager(new LinearLayoutManager(mContext));
 
+        // setup swipe to remove item
+        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleItemTouchCallback);
+        itemTouchHelper.attachToRecyclerView(mBinding.recycler);
     }
 
     @Override
@@ -76,4 +82,19 @@ public class WordBookFragment extends BaseFragment implements WordBookPresenter.
     public void setonGroupListItems(List<GroupItem> list) {
         mAdapter.setGroupItems(list);
     }
+
+    ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
+        @Override
+        public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+            return true;
+        }
+
+        @Override
+        public void onSwiped(RecyclerView.ViewHolder viewHolder, int swipeDir) {
+            // 삭제되는 아이템의 포지션을 가져온다
+            final int position = viewHolder.getAdapterPosition();
+            // 데이터의 해당 포지션을 삭제한다
+            mAdapter.removeItem(position);
+        }
+    };
 }

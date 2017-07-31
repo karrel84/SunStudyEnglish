@@ -45,4 +45,9 @@ public class GroupNameAdapter extends RecyclerView.Adapter<GroupNameHolder> {
         this.groupItems = groupItems;
         notifyDataSetChanged();
     }
+
+    public void removeItem(int position) {
+        groupItems.remove(position);
+        notifyItemRemoved(position);
+    }
 }
