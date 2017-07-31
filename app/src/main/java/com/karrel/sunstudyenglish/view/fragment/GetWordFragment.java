@@ -126,7 +126,6 @@ public class GetWordFragment extends BaseFragment implements GetWordPresenter.Vi
     public void removeItem(int position) {
         // todo 아답타에게 알린다
         mAdapter.removeItem(position);
-        mBinding.recyclerView.getAdapter().notifyItemRemoved(position);
     }
 
     @Override

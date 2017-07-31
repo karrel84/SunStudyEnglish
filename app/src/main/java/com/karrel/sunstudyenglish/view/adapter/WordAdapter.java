@@ -56,4 +56,9 @@ public class WordAdapter extends RecyclerView.Adapter<WordNameHolder> {
         items = item;
         notifyDataSetChanged();
     }
+
+    public void removeItem(int position) {
+        items.remove(position);
+        notifyItemRemoved(position);
+    }
 }
