@@ -69,13 +69,14 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = null;
         switch (item.getItemId()) {
 
-            case R.id.navigation_home:
+            case R.id.navigation_cardmemorize:
+
+                break;
+            case R.id.navigation_wordbook:
                 fragment = new WordBookFragment();
                 break;
-            case R.id.navigation_dashboard:
+            case R.id.navigation_getword:
                 fragment = new GetWordFragment();
-                break;
-            case R.id.navigation_notifications:
                 break;
 
         }

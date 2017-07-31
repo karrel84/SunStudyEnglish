@@ -14,18 +14,28 @@ public interface GetWordPresenter {
 
     void getTheWord();
 
-    void showWord(ArrayList<String> wordsList);
+    void onActivityResult(ArrayList<String> wordsList);
+
+    void onLoadOnce();
+
+    void saveList(ArrayList<WordItem> items);
+
+    void removeItem(int position);
 
     interface View {
 
         void startOcrActivity();
 
-        void addWordItem(WordItem item);
-
         void showProgress();
 
         void hideProgress();
 
-        void onCompleted(ArrayList<WordItem> wordItems);
+        void showAddWordView();
+
+        void showFloatButton();
+
+        void addWordItem(WordItem wordItem);
+
+        void removeItem(int position);
     }
 }
