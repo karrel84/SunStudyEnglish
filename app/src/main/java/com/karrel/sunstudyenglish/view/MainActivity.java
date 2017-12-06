@@ -3,6 +3,7 @@ package com.karrel.sunstudyenglish.view;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.view.ViewPager;
 
 import com.karrel.sunstudyenglish.R;
 import com.karrel.sunstudyenglish.base.BaseActivity;
@@ -31,23 +32,19 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
 
         // 뷰페이저를 설정한다
         binding.viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
+        binding.viewPager.addOnPageChangeListener(presenter.onPageChangeListener());
 
         // 하단메뉴 설정
-        binding.navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+        binding.navigation.setOnNavigationItemSelectedListener(presenter.onNavigationItemSelectedListener());
     }
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = item -> {
-        switch (item.getItemId()) {
-            case R.id.navigation_cardmemorize:
-                return true;
-            case R.id.navigation_wordbook:
-                return true;
-            case R.id.navigation_getword:
-                return true;
+    @Override
+    public void setCheckedBottomItem(int position) {
+        binding.navigation.getMenu().getItem(position).setChecked(true);
+    }
 
-        }
-        return false;
-    };
-
+    @Override
+    public void setCurrentItem(int i) {
+        binding.viewPager.setCurrentItem(i);
+    }
 }
