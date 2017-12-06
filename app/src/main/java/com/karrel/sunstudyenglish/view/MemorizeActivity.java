@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Toast;
 
+import com.karrel.mylibrary.RLog;
 import com.karrel.sunstudyenglish.R;
 import com.karrel.sunstudyenglish.base.BaseActivity;
 import com.karrel.sunstudyenglish.databinding.ActivityMemorizeBinding;
@@ -42,7 +43,7 @@ public class MemorizeActivity extends BaseActivity implements MemorizePresenter.
         super.onParseExtra();
 
         mItem = getIntent().getParcelableExtra(EXTRA.GROUP_ITEM);
-        mPresenter.validityCheck(mItem);
+        mPresenter.onParseExtra(mItem);
     }
 
     @Override
@@ -66,6 +67,12 @@ public class MemorizeActivity extends BaseActivity implements MemorizePresenter.
     @Override
     public void addWordItem(WordItem item1) {
         mAdapter.addItem(item1);
+    }
+
+    @Override
+    public void setTitle(String title) {
+        RLog.d(String.format("setTitle(%s)", title));
+        super.setTitle(title);
     }
 
     /**

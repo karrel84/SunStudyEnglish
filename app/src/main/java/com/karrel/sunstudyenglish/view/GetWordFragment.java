@@ -11,8 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.karrel.sunstudyenglish.R;
 import com.karrel.sunstudyenglish.base.BaseFragment;
 import com.karrel.sunstudyenglish.databinding.FragmentGetWordBinding;
@@ -23,9 +21,7 @@ import com.karrel.sunstudyenglish.presenter.GetWordPresenter;
 import com.karrel.sunstudyenglish.presenter.GetWordPresenterImpl;
 import com.karrel.sunstudyenglish.view.adapter.WordAdapter;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
 

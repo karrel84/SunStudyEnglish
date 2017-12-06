@@ -8,7 +8,7 @@ import com.karrel.sunstudyenglish.model.WordItem;
  */
 
 public interface MemorizePresenter {
-    void validityCheck(GroupItem mItem);
+    void onParseExtra(GroupItem mItem);
 
     void getWords(GroupItem mItem);
 
@@ -17,5 +17,7 @@ public interface MemorizePresenter {
         void onErrorFinish(String s);
 
         void addWordItem(WordItem item1);
+
+        void setTitle(String title);
     }
 }

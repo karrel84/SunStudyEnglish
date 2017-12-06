@@ -1,7 +1,5 @@
 package com.karrel.sunstudyenglish.presenter;
 
-import android.util.Log;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -21,6 +19,7 @@ public class MemorizePresenterImpl implements MemorizePresenter {
     private final DatabaseReference mReference;
     private final FirebaseDatabase mDatabase;
     private final String TAG = "MemorizePresenterImpl";
+    private GroupItem mItem;
 
 
     public MemorizePresenterImpl(MemorizePresenter.View view) {
@@ -31,10 +30,14 @@ public class MemorizePresenterImpl implements MemorizePresenter {
     }
 
     @Override
-    public void validityCheck(GroupItem mItem) {
-        if (mItem == null) {
+    public void onParseExtra(GroupItem item) {
+        // 값체크
+        if (item == null) {
             mView.onErrorFinish("아이템의 값이 없습니다.");
+            return;
         }
+        mItem = item;
+        mView.setTitle(mItem.getKey());
     }
 
     @Override
