@@ -9,6 +9,7 @@ import com.karrel.sunstudyenglish.base.BaseActivity;
 import com.karrel.sunstudyenglish.databinding.ActivityMainBinding;
 import com.karrel.sunstudyenglish.presenter.MainPresenter;
 import com.karrel.sunstudyenglish.presenter.MainPresenterImpl;
+import com.karrel.sunstudyenglish.view.adapter.ViewPagerAdapter;
 
 public class MainActivity extends BaseActivity implements MainPresenter.View {
 
@@ -28,18 +29,12 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
         // 타이틀을 설정한다
         setSupportActionBar(binding.toolbar);
 
+        // 뷰페이저를 설정한다
+        binding.viewPager.setAdapter(new ViewPagerAdapter(getSupportFragmentManager()));
+
         // 하단메뉴 설정
-        setupBottomMenu();
+        binding.navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
-
-    /**
-     * 하단메뉴
-     */
-    private void setupBottomMenu() {
-        final BottomNavigationView navigation = findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
-
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = item -> {
