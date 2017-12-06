@@ -3,16 +3,13 @@ package com.karrel.sunstudyenglish.view.adapter.holder;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
 import android.widget.Toast;
 
 import com.karrel.sunstudyenglish.databinding.ItemGroupNameBinding;
-import com.karrel.sunstudyenglish.databinding.ItemWordBinding;
 import com.karrel.sunstudyenglish.model.GroupItem;
-import com.karrel.sunstudyenglish.model.WordItem;
 import com.karrel.sunstudyenglish.presenter.GroupNamePresenter;
 import com.karrel.sunstudyenglish.presenter.GroupNamePresenterImpl;
-import com.karrel.sunstudyenglish.view.activity.MemorizeActivity;
+import com.karrel.sunstudyenglish.view.MemorizeActivity;
 
 /**
  * Created by 이주영 on 2017-06-21.

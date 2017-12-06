@@ -1,4 +1,4 @@
-package com.karrel.sunstudyenglish.view.fragment;
+package com.karrel.sunstudyenglish.view;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;

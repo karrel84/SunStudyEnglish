@@ -15,7 +15,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".view.activity.MainActivity"
+            android:name=".view.MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -27,7 +27,7 @@
         <activity
             android:name=".ocr.OcrCaptureActivity"
             android:label="Read Text" />
-        <activity android:name=".view.activity.MemorizeActivity"></activity>
+        <activity android:name=".view.MemorizeActivity"></activity>
     </application>
 
 </manifest>
