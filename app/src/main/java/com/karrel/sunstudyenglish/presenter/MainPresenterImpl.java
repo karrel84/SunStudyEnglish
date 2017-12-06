@@ -3,6 +3,7 @@ package com.karrel.sunstudyenglish.presenter;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;
 
+import com.karrel.mylibrary.RLog;
 import com.karrel.sunstudyenglish.R;
 
 /**
@@ -14,6 +15,7 @@ public class MainPresenterImpl implements MainPresenter {
 
     public MainPresenterImpl(View view) {
         this.view = view;
+        view.setTitle("단어 외우기");
     }
 
     @Override
@@ -26,7 +28,20 @@ public class MainPresenterImpl implements MainPresenter {
 
             @Override
             public void onPageSelected(int position) {
+                RLog.d(String.format("onPageSelected(%s)", position));
                 view.setCheckedBottomItem(position);
+
+                switch (position) {
+                    case 0:
+                        view.setTitle("단어 외우기");
+                        break;
+                    case 1:
+                        view.setTitle("단어장");
+                        break;
+                    case 2:
+                        view.setTitle("단어 수집");
+                        break;
+                }
             }
 
             @Override
@@ -39,6 +54,7 @@ public class MainPresenterImpl implements MainPresenter {
     @Override
     public BottomNavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener() {
         return item -> {
+            RLog.d();
             switch (item.getItemId()) {
                 case R.id.navigation_cardmemorize:
                     view.setCurrentItem(0);

@@ -61,6 +61,8 @@ dependencies {
 
     // Required only if Twitter login support is required
     compile("com.twitter.sdk.android:twitter-core:3.0.0@aar") { transitive = true }
+
+    compile 'com.github.karrel84:RellLog:1.0.5'
 }
 
 apply plugin: 'com.google.gms.google-services'

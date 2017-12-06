@@ -47,4 +47,9 @@ public class MainActivity extends BaseActivity implements MainPresenter.View {
     public void setCurrentItem(int i) {
         binding.viewPager.setCurrentItem(i);
     }
+
+    @Override
+    public void setTitle(String s) {
+        binding.toolbar.setTitle(s);
+    }
 }

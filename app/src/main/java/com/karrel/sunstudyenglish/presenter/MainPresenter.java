@@ -17,5 +17,7 @@ public interface MainPresenter {
         void setCheckedBottomItem(int position);
 
         void setCurrentItem(int i);
+
+        void setTitle(String s);
     }
 }
