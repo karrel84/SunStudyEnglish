@@ -22,7 +22,7 @@ import com.karrel.sunstudyenglish.view.adapter.GroupNameAdapter;
 import java.util.List;
 
 /**
- * 단어암기 화면이될것이다
+ * 단어장
  */
 public class WordBookFragment extends BaseFragment implements WordBookPresenter.View {
 

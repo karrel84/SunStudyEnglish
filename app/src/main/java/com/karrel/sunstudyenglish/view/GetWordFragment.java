@@ -29,6 +29,9 @@ import java.util.Date;
 
 import static android.app.Activity.RESULT_OK;
 
+/**
+ * 단어수집
+ */
 public class GetWordFragment extends BaseFragment implements GetWordPresenter.View {
     private final String TAG = "GetWordFragment";
 
