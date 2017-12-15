@@ -1,11 +1,7 @@
 package com.karrel.sunstudyenglish.presenter;
 
-import android.util.Log;
-
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.karrel.mylibrary.RLog;
@@ -41,7 +37,7 @@ public class WordBookPresenterImpl implements WordBookPresenter, ValueEventListe
         // getWords에 대한 쿼리를 리턴받는다
         mQuery = NetManager.getInstance().getWords();
         // 리스너를 등록해준다.
-        mQuery.addValueEventListener(this);
+        mQuery.addListenerForSingleValueEvent(this);
     }
 
     @Override
@@ -68,6 +64,7 @@ public class WordBookPresenterImpl implements WordBookPresenter, ValueEventListe
         for (DataSnapshot snapshot : iterable) {
             GroupItem item = new GroupItem(snapshot.getKey(), snapshot.getValue().toString());
             list.add(item);
+            RLog.d("item : " + item.toString());
         }
 
         mView.setonGroupListItems(list);

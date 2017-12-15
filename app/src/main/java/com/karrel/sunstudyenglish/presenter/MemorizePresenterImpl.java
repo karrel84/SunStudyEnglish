@@ -1,13 +1,10 @@
 package com.karrel.sunstudyenglish.presenter;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
-import com.google.firebase.database.ValueEventListener;
+import com.karrel.sunstudyenglish.base.net.NetManager;
 import com.karrel.sunstudyenglish.model.GroupItem;
 import com.karrel.sunstudyenglish.model.WordItem;
+
+import rx.Observer;
 
 /**
  * Created by bodyfriend_dev on 2017. 7. 27..
@@ -16,17 +13,12 @@ import com.karrel.sunstudyenglish.model.WordItem;
 public class MemorizePresenterImpl implements MemorizePresenter {
     private MemorizePresenter.View mView;
 
-    private final DatabaseReference mReference;
-    private final FirebaseDatabase mDatabase;
     private final String TAG = "MemorizePresenterImpl";
     private GroupItem mItem;
 
 
     public MemorizePresenterImpl(MemorizePresenter.View view) {
         mView = view;
-        // 파이어베이스 초기화
-        mDatabase = FirebaseDatabase.getInstance();
-        mReference = mDatabase.getReference();
     }
 
     @Override
@@ -42,22 +34,25 @@ public class MemorizePresenterImpl implements MemorizePresenter {
 
     @Override
     public void getWords(GroupItem item) {
-        // init firebase
+        // NetManager에서 각 단어에 대한 객체를 받아온다.
         for (String word : item.getWords()) {
-            Query query = mReference.child("words").child(word);
-            query.addListenerForSingleValueEvent(new ValueEventListener() {
+            NetManager.getInstance().getWord(word).subscribe(new Observer<WordItem>() {
                 @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    String meaning = dataSnapshot.child("meaning").getValue(String.class);
-                    String word = dataSnapshot.child("word").getValue(String.class);
-                    mView.addWordItem(new WordItem(word, meaning));
+                public void onCompleted() {
+
                 }
 
                 @Override
-                public void onCancelled(DatabaseError databaseError) {
+                public void onError(Throwable e) {
 
+                }
+
+                @Override
+                public void onNext(WordItem wordItem) {
+                    mView.addWordItem(wordItem);
                 }
             });
+
         }
     }
 

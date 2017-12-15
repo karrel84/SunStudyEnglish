@@ -34,7 +34,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="?android:attr/windowBackground"
-            app:layout_behavior="com.karrel.sunstudyenglish.custom_view.BottomNavigationBehavior"
+            app:layout_behavior="com.karrel.sunstudyenglish.base.customview.BottomNavigationBehavior"
             app:menu="@menu/navigation" />
     </android.support.design.widget.CoordinatorLayout>
 
