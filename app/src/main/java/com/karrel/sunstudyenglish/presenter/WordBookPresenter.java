@@ -14,8 +14,6 @@ public interface WordBookPresenter {
 
     void getGroupName();
 
-    void onDestroy();
-
     interface View {
 
         void setonGroupListItems(List<GroupItem> list);

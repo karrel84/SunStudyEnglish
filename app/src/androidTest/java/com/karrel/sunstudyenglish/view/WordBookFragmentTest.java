@@ -1,7 +1,6 @@
 package com.karrel.sunstudyenglish.view;
 
 import com.karrel.sunstudyenglish.model.GroupItem;
-import com.karrel.sunstudyenglish.model.WordItem;
 import com.karrel.sunstudyenglish.presenter.WordBookPresenter;
 import com.karrel.sunstudyenglish.presenter.WordBookPresenterImpl;
 

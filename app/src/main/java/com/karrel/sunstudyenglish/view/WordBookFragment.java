@@ -75,7 +75,6 @@ public class WordBookFragment extends BaseFragment implements WordBookPresenter.
     @Override
     public void onDestroy() {
         super.onDestroy();
-        mPresenter.onDestroy();
     }
 
     @Override

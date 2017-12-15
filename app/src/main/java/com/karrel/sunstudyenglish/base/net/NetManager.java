@@ -6,7 +6,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.karrel.mylibrary.RLog;
+import com.karrel.sunstudyenglish.model.GroupItem;
 import com.karrel.sunstudyenglish.model.WordItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import rx.subjects.PublishSubject;
 
@@ -34,10 +39,31 @@ public class NetManager {
         mReference = mDatabase.getReference();
     }
 
-    public Query getWords() {
-        PublishSubject<WordItem> subject = PublishSubject.create();
+    public PublishSubject<List<GroupItem>> getWords() {
+        PublishSubject<List<GroupItem>> subject = PublishSubject.create();
 
-        return mReference.child("users").child("karrel").child("words");
+        mReference.child("users").child("karrel").child("words").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                RLog.d("onDataChange");
+                Iterable<DataSnapshot> iterable = dataSnapshot.getChildren();
+                List<GroupItem> list = new ArrayList<>();
+                for (DataSnapshot snapshot : iterable) {
+                    GroupItem item = new GroupItem(snapshot.getKey(), snapshot.getValue().toString());
+                    list.add(item);
+                    RLog.d("item : " + item.toString());
+                }
+                subject.onNext(list);
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+        return subject;
+
     }
 
     public PublishSubject<WordItem> getWord(String word) {
