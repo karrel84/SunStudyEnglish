@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.karrel.sunstudyenglish.ocr;
+package com.karrel.sunstudyenglish.base.ocr;
 
 import android.util.Log;
 import android.util.SparseArray;
 
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.text.TextBlock;
-import com.karrel.sunstudyenglish.ocr.camera.GraphicOverlay;
+import com.karrel.sunstudyenglish.base.ocr.camera.GraphicOverlay;
 
 /**
  * A very simple Processor which gets detected TextBlocks and adds them to the overlay

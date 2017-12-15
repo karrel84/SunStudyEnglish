@@ -6,7 +6,7 @@ import android.util.Log;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.karrel.sunstudyenglish.model.WordItem;
-import com.karrel.sunstudyenglish.util.EnglishToKorean;
+import com.karrel.sunstudyenglish.base.util.EnglishToKorean;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

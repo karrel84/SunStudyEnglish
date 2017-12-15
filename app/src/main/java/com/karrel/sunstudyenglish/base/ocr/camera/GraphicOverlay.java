@@ -13,14 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.karrel.sunstudyenglish.ocr.camera;
+package com.karrel.sunstudyenglish.base.ocr.camera;
 
 import android.content.Context;
 import android.graphics.Canvas;
 import android.util.AttributeSet;
 import android.view.View;
 
-import com.karrel.sunstudyenglish.ocr.OcrGraphic;
+import com.karrel.sunstudyenglish.base.ocr.OcrGraphic;
 
 import java.util.HashSet;
 import java.util.Set;

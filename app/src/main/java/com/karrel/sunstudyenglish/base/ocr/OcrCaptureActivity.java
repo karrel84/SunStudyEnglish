@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.karrel.sunstudyenglish.ocr;
+package com.karrel.sunstudyenglish.base.ocr;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -43,9 +43,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.vision.text.TextRecognizer;
 import com.karrel.sunstudyenglish.R;
-import com.karrel.sunstudyenglish.ocr.camera.CameraSource;
-import com.karrel.sunstudyenglish.ocr.camera.CameraSourcePreview;
-import com.karrel.sunstudyenglish.ocr.camera.GraphicOverlay;
+import com.karrel.sunstudyenglish.base.ocr.camera.CameraSource;
+import com.karrel.sunstudyenglish.base.ocr.camera.CameraSourcePreview;
+import com.karrel.sunstudyenglish.base.ocr.camera.GraphicOverlay;
 
 import java.io.IOException;
 import java.util.ArrayList;

@@ -16,7 +16,7 @@ import com.karrel.sunstudyenglish.base.BaseFragment;
 import com.karrel.sunstudyenglish.databinding.FragmentGetWordBinding;
 import com.karrel.sunstudyenglish.model.RequestCodes;
 import com.karrel.sunstudyenglish.model.WordItem;
-import com.karrel.sunstudyenglish.ocr.OcrCaptureActivity;
+import com.karrel.sunstudyenglish.base.ocr.OcrCaptureActivity;
 import com.karrel.sunstudyenglish.presenter.GetWordPresenter;
 import com.karrel.sunstudyenglish.presenter.GetWordPresenterImpl;
 import com.karrel.sunstudyenglish.view.adapter.WordAdapter;

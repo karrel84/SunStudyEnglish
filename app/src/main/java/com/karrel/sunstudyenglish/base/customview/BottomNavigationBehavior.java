@@ -1,4 +1,4 @@
-package com.karrel.sunstudyenglish.custom_view;
+package com.karrel.sunstudyenglish.base.customview;
 
 import android.content.Context;
 import android.content.res.TypedArray;

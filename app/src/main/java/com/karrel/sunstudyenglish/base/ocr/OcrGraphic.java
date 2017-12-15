@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.karrel.sunstudyenglish.ocr;
+package com.karrel.sunstudyenglish.base.ocr;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -22,7 +22,7 @@ import android.graphics.RectF;
 
 import com.google.android.gms.vision.text.Text;
 import com.google.android.gms.vision.text.TextBlock;
-import com.karrel.sunstudyenglish.ocr.camera.GraphicOverlay;
+import com.karrel.sunstudyenglish.base.ocr.camera.GraphicOverlay;
 
 import java.util.HashSet;
 import java.util.List;

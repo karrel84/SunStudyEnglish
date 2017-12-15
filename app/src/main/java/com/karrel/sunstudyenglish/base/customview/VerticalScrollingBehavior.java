@@ -1,4 +1,4 @@
-package com.karrel.sunstudyenglish.custom_view;
+package com.karrel.sunstudyenglish.base.customview;
 
 /**
  * Created by Rell on 2017. 12. 6..

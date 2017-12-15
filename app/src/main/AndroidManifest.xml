@@ -25,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ocr.OcrCaptureActivity"
+            android:name=".base.ocr.OcrCaptureActivity"
             android:label="Read Text" />
         <activity android:name=".view.MemorizeActivity"></activity>
     </application>

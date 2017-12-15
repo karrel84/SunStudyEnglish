@@ -8,6 +8,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.karrel.mylibrary.RLog;
+import com.karrel.sunstudyenglish.base.net.NetManager;
 import com.karrel.sunstudyenglish.model.GroupItem;
 
 import java.util.ArrayList;
@@ -17,18 +19,14 @@ import java.util.List;
  * Created by rell on 2017-07-21.
  */
 
-public class WordBookPresenterImpl implements WordBookPresenter {
+public class WordBookPresenterImpl implements WordBookPresenter, ValueEventListener {
 
     private static final String TAG = "WordBookPresenterImpl";
-    private final FirebaseDatabase mDatabase;
     private WordBookPresenter.View mView;
-    private DatabaseReference mReference;
     private Query mQuery;
 
     public WordBookPresenterImpl() {
-        // 파이어베이스 초기화
-        mDatabase = FirebaseDatabase.getInstance();
-        mReference = mDatabase.getReference();
+
     }
 
     @Override
@@ -38,13 +36,17 @@ public class WordBookPresenterImpl implements WordBookPresenter {
 
     @Override
     public void getGroupName() {
+        // 방어코드 : 이전에 등록한 리스너가 있다면 해제한다.
         removeEventListeners();
-        mQuery = mReference.child("users").child("karrel").child("words");
-        mQuery.addValueEventListener(onGroupValueEventListener);
+        // getWords에 대한 쿼리를 리턴받는다
+        mQuery = NetManager.getInstance().getWords();
+        // 리스너를 등록해준다.
+        mQuery.addValueEventListener(this);
     }
 
     @Override
     public void onDestroy() {
+        RLog.d("onDestroy");
         removeEventListeners();
     }
 
@@ -52,29 +54,27 @@ public class WordBookPresenterImpl implements WordBookPresenter {
      * 이벤트를 삭제하자
      */
     private void removeEventListeners() {
+        RLog.d("removeEventListeners");
         if (mQuery != null) {
-            mQuery.removeEventListener(onGroupValueEventListener);
+            mQuery.removeEventListener(this);
         }
     }
 
-    private final ValueEventListener onGroupValueEventListener = new ValueEventListener() {
-        @Override
-        public void onDataChange(DataSnapshot dataSnapshot) {
-            Iterable<DataSnapshot> iterable = dataSnapshot.getChildren();
-            List<GroupItem> list = new ArrayList<>();
-            for (DataSnapshot snapshot : iterable) {
-                Log.e(TAG, "getKey > " + snapshot.getKey());
-                Log.e(TAG, "getValue > " + snapshot.getValue());
-                GroupItem item = new GroupItem(snapshot.getKey(), snapshot.getValue().toString());
-                list.add(item);
-            }
-
-            mView.setonGroupListItems(list);
+    @Override
+    public void onDataChange(DataSnapshot dataSnapshot) {
+        RLog.d("onDataChange");
+        Iterable<DataSnapshot> iterable = dataSnapshot.getChildren();
+        List<GroupItem> list = new ArrayList<>();
+        for (DataSnapshot snapshot : iterable) {
+            GroupItem item = new GroupItem(snapshot.getKey(), snapshot.getValue().toString());
+            list.add(item);
         }
 
-        @Override
-        public void onCancelled(DatabaseError databaseError) {
+        mView.setonGroupListItems(list);
+    }
 
-        }
-    };
+    @Override
+    public void onCancelled(DatabaseError databaseError) {
+        RLog.d("onCancelled");
+    }
 }

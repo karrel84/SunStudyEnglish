@@ -2,8 +2,6 @@ package com.karrel.sunstudyenglish.view;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.view.ViewPager;
 
 import com.karrel.sunstudyenglish.R;
 import com.karrel.sunstudyenglish.base.BaseActivity;

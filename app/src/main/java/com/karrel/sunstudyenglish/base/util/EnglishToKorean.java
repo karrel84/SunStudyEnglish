@@ -1,4 +1,4 @@
-package com.karrel.sunstudyenglish.util;
+package com.karrel.sunstudyenglish.base.util;
 
 import android.annotation.TargetApi;
 import android.os.Build;
