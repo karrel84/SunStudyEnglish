@@ -13,6 +13,7 @@ import com.karrel.sunstudyenglish.model.GroupItem;
 import com.karrel.sunstudyenglish.model.WordItem;
 import com.karrel.sunstudyenglish.presenter.MemorizePresenter;
 import com.karrel.sunstudyenglish.presenter.MemorizePresenterImpl;
+import com.karrel.sunstudyenglish.view.adapter.MemorizeAdapter;
 import com.karrel.sunstudyenglish.view.adapter.WordAdapter;
 
 /**
@@ -29,7 +30,7 @@ public class MemorizeActivity extends BaseActivity implements MemorizePresenter.
     private ActivityMemorizeBinding mBinding;
     private GroupItem mItem;
     private MemorizePresenter mPresenter;
-    private WordAdapter mAdapter;
+    private MemorizeAdapter mAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,8 +66,8 @@ public class MemorizeActivity extends BaseActivity implements MemorizePresenter.
     }
 
     @Override
-    public void addWordItem(WordItem item1) {
-        mAdapter.addItem(item1);
+    public void addWordItem(WordItem item) {
+        mAdapter.addItem(item);
     }
 
     @Override
@@ -79,8 +80,7 @@ public class MemorizeActivity extends BaseActivity implements MemorizePresenter.
      * 아답터를 초기화한다
      */
     private void initAdapter() {
-        mAdapter = new WordAdapter();
-        mBinding.recyclerView.setAdapter(mAdapter);
-        mBinding.recyclerView.setLayoutManager(new LinearLayoutManager(mContext));
+        mAdapter = new MemorizeAdapter();
+        mBinding.memoFlipper.setAdapter(mAdapter);
     }
 }

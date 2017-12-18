@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.karrel.mylibrary.RLog;
 import com.karrel.sunstudyenglish.R;
 import com.karrel.sunstudyenglish.base.BaseFragment;
 import com.karrel.sunstudyenglish.databinding.FragmentFragmentWordBookBinding;
@@ -79,6 +80,11 @@ public class WordBookFragment extends BaseFragment implements WordBookPresenter.
 
     @Override
     public void setonGroupListItems(List<GroupItem> list) {
+        RLog.d("setonGroupListItems");
+        for (GroupItem item : list) {
+            RLog.d("item : " + item.toString());
+        }
+
         mAdapter.setGroupItems(list);
     }
 

@@ -14,6 +14,7 @@ import com.karrel.sunstudyenglish.databinding.FragmentCardBinding;
 import com.karrel.sunstudyenglish.model.WordItem;
 import com.karrel.sunstudyenglish.presenter.CardMemorizePresenter;
 import com.karrel.sunstudyenglish.presenter.CardMemorizePresenterImpl;
+import com.karrel.sunstudyenglish.view.adapter.MemorizeAdapter;
 
 /**
  * Created by Rell on 2017. 7. 31..
@@ -25,6 +26,7 @@ public class CardMemorizeFragment extends BaseFragment implements CardMemorizePr
 
     private FragmentCardBinding binding;
     private CardMemorizePresenter presenter;
+    private MemorizeAdapter adapter;
 
     @Nullable
     @Override
@@ -39,6 +41,8 @@ public class CardMemorizeFragment extends BaseFragment implements CardMemorizePr
     @Override
     protected void onLoadOnce() {
         super.onLoadOnce();
+        adapter = new MemorizeAdapter();
+        binding.memoFlipper.setAdapter(adapter);
     }
 
     @Override
@@ -49,8 +53,9 @@ public class CardMemorizeFragment extends BaseFragment implements CardMemorizePr
     }
 
     @Override
-    public void addWordItem(WordItem wordItem) {
+    public void addWordItem(WordItem item) {
+        adapter.addItem(item);
         RLog.d("addWordItem");
-        RLog.d("wordItem : " + wordItem.toString());
+        RLog.d("wordItem : " + item.toString());
     }
 }
