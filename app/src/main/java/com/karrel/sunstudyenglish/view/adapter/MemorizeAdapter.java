@@ -47,6 +47,7 @@ public class MemorizeAdapter extends BaseAdapter {
         ItemMemorizeBinding binding;
         if (convertView == null) {
             binding = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_memorize, parent, false);
+            convertView = binding.getRoot();
             convertView.setTag(binding);
         }
 

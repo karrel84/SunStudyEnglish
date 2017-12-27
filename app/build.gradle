@@ -64,7 +64,8 @@ dependencies {
 
     compile 'com.github.karrel84:RellLog:1.0.5'
     compile 'com.github.karrel84:FlipCardView:1.01'
-    compile 'com.github.karrel84:MemoFlipper:1.01'
+    compile 'com.github.karrel84:MemoFlipper:1.0.3'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
