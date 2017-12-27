@@ -56,12 +56,12 @@ public class MemorizeAdapter extends BaseAdapter {
         WordItem item = wordItems.get(position);
 
         ItemCardWordBinding cardFront = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_card_word, parent, false);
-        cardFront.text.setText(item.meaning);
+        cardFront.text.setText(item.word);
         binding.flipCard.setCardA(cardFront.getRoot());
 
         ItemCardWordMeanBinding cardBack = DataBindingUtil.inflate(LayoutInflater.from(parent.getContext()), R.layout.item_card_word_mean, parent, false);
         cardBack.text.setText(item.meaning);
-        binding.flipCard.setCardA(cardBack.getRoot());
+        binding.flipCard.setCardB(cardBack.getRoot());
 
         return binding.getRoot();
     }
