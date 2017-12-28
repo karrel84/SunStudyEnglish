@@ -5,8 +5,8 @@
 
     <flipview.com.karrel.flipcardview.view.FlipCardView
         android:id="@+id/flipCard"
-        android:layout_width="300dp"
-        android:layout_height="180dp"
+        android:layout_width="216dp"
+        android:layout_height="360dp"
         android:background="@color/transparent"
         android:translationZ="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
