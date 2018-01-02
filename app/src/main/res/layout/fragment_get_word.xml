@@ -50,7 +50,7 @@
                 style="@style/MenuButtonsStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_edit"
+                android:src="@drawable/ic_camera_enhance_white_24dp"
                 fab:fab_label="단어 수집" />
 
             <com.github.clans.fab.FloatingActionButton
@@ -58,7 +58,7 @@
                 style="@style/MenuButtonsStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_edit"
+                android:src="@drawable/ic_note_add_white_24dp"
                 fab:fab_label="저장" />
 
         </com.github.clans.fab.FloatingActionMenu>
