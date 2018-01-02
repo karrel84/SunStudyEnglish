@@ -22,6 +22,8 @@ public interface GetWordPresenter {
 
     void removeItem(int position);
 
+    void saveList();
+
     interface View {
 
         void startOcrActivity();
@@ -30,12 +32,10 @@ public interface GetWordPresenter {
 
         void hideProgress();
 
-        void showAddWordView();
-
-        void showFloatButton();
-
         void addWordItem(WordItem wordItem);
 
         void removeItem(int position);
+
+        void hideEmptyText();
     }
 }

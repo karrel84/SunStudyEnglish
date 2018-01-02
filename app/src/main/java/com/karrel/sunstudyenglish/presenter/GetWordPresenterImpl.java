@@ -65,12 +65,21 @@ public class GetWordPresenterImpl implements GetWordPresenter {
         translateWords(wordsList);
     }
 
+    @Override
+    public void onLoadOnce() {
+
+    }
+
     /**
      * 단어를 번역하는 자업을 한다.
      *
      * @param wordsList
      */
     private void translateWords(ArrayList<String> wordsList) {
+        if(!wordsList.isEmpty()){
+            mView.hideEmptyText();
+        }
+
         mWordItems.clear();
 
         // 큐에 넣고 작업하는건 어떨까?
@@ -96,6 +105,7 @@ public class GetWordPresenterImpl implements GetWordPresenter {
             }
         }
 
+        // 병렬로 작업을한다.
         while (!queue.isEmpty()) {
             getWord(queue.poll())
                     .subscribeOn(Schedulers.io()) // 작업은 비동기 스레드에서
@@ -122,6 +132,7 @@ public class GetWordPresenterImpl implements GetWordPresenter {
 
     /**
      * 받은 리스트의 반을 리턴한다.
+     *
      * @param list
      * @return
      */
@@ -138,16 +149,6 @@ public class GetWordPresenterImpl implements GetWordPresenter {
     }
 
     @Override
-    public void onLoadOnce() {
-        boolean isEmpty = mWordItems.isEmpty();
-        if (isEmpty) {
-            mView.showAddWordView();
-        } else {
-            mView.showFloatButton();
-        }
-    }
-
-    @Override
     public void saveList(ArrayList<WordItem> items) {
         if (items == null) return;
         saveListToServer(items);
@@ -157,6 +158,15 @@ public class GetWordPresenterImpl implements GetWordPresenter {
     public void removeItem(int position) {
         mWordItems.remove(position);
         mView.removeItem(position);
+    }
+
+    @Override
+    public void saveList() {
+        if (mWordItems.isEmpty()) {
+            return;
+        }
+
+        saveListToServer(mWordItems);
     }
 
     // 서버에 리스트를 저장해볼까요
@@ -182,52 +192,6 @@ public class GetWordPresenterImpl implements GetWordPresenter {
                     else return new WordItem(s, wordMeans);
                 }) // 문자의 뜻을 가져옴
                 .filter(i -> i != null);
-    }
-
-    /**
-     * 단어를 병렬처리한다.
-     *
-     * @param wordsList
-     * @return
-     */
-    private PublishSubject<WordItem> getWordMuliplex(ArrayList<String> wordsList) {
-
-        PublishSubject<WordItem> subject = PublishSubject.create();
-
-        for (String word : wordsList) {
-            RLog.d("word : " + word);
-            Observable.just(word)
-                    .subscribeOn(Schedulers.io()) // 작업은 비동기 스레드에서
-                    .observeOn(AndroidSchedulers.mainThread()) // UI작업은 메인스레드에서
-                    .filter(s -> !TextUtils.isEmpty(s)) // 빈값인지 판단
-                    .filter(s -> regularExpression(s)) // 문자인지 판단
-                    .map(s ->
-                    {
-                        String wordMeans = mEnglishToKorean.getWord(s);
-                        if (TextUtils.isEmpty(wordMeans.trim())) return null;
-                        else return new WordItem(s, wordMeans);
-                    }) // 문자의 뜻을 가져옴
-                    .filter(i -> i != null)
-                    .subscribe(new Observer<WordItem>() {
-                        @Override
-                        public void onCompleted() {
-                            RLog.d("onCompleted");
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            RLog.e(e.getMessage());
-                        }
-
-                        @Override
-                        public void onNext(WordItem wordItem) {
-                            RLog.d("onNext : " + wordItem.toString());
-                            subject.onNext(wordItem);
-                        }
-                    })
-            ;
-        }
-        return subject;
     }
 
     /**

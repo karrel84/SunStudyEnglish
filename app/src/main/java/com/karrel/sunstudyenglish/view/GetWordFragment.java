@@ -50,28 +50,19 @@ public class GetWordFragment extends BaseFragment implements GetWordPresenter.Vi
         super.onLoadOnce();
         // 프리젠터
         setupPresenter();
-
-        // 버튼 초기화
-        setupButtons();
-
         // 리사이클러뷰 초기화
         setupRecyclerView();
+
+        // 플로팅 액션 버튼 초기화
+        setupFloatingActionButtons();
     }
 
-    /**
-     * 버튼 초기화
-     */
-    private void setupButtons() {
-        mBinding.getWord.setOnClickListener(view -> {
-            // 단어를 가져와
-            mPresenter.getTheWord();
-        });
-
-        // 버튼설정
-        mBinding.addWord.setOnClickListener(v -> {
-            // 단어를 가져와
-            mPresenter.getTheWord();
-        });
+    // 플로팅 액션 버튼 초기화
+    private void setupFloatingActionButtons() {
+        // 단어 가져오기
+        mBinding.camera.setOnClickListener(v -> mPresenter.getTheWord());
+        // 단어 저장
+        mBinding.save.setOnClickListener(v -> mPresenter.saveList());
     }
 
     private void setupPresenter() {
@@ -123,8 +114,12 @@ public class GetWordFragment extends BaseFragment implements GetWordPresenter.Vi
 
     @Override
     public void removeItem(int position) {
-        // todo 아답타에게 알린다
         mAdapter.removeItem(position);
+    }
+
+    @Override
+    public void hideEmptyText() {
+        mBinding.emptyText.setVisibility(View.GONE);
     }
 
     @Override
@@ -135,23 +130,6 @@ public class GetWordFragment extends BaseFragment implements GetWordPresenter.Vi
     @Override
     public void hideProgress() {
         hideProgressDialog();
-    }
-
-    // todo 서버에 저장버튼을 만들어서 이거해줘야함
-    private void saveList() {
-        mPresenter.saveList(null);
-    }
-
-    @Override
-    public void showAddWordView() {
-        mBinding.getWord.setVisibility(View.VISIBLE);
-        mBinding.addWord.setVisibility(View.GONE);
-    }
-
-    @Override
-    public void showFloatButton() {
-        mBinding.getWord.setVisibility(View.GONE);
-        mBinding.addWord.setVisibility(View.VISIBLE);
     }
 
     ItemTouchHelper.SimpleCallback simpleItemTouchCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT) {
