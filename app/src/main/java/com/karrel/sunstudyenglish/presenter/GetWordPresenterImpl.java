@@ -61,7 +61,16 @@ public class GetWordPresenterImpl implements GetWordPresenter {
     public void onActivityResult(ArrayList<String> wordsList) {
         Log.d(TAG, wordsList.toString());
 
-//        mView.showProgress();
+        // 단어를 번역하는 자업을 한다.
+        translateWords(wordsList);
+    }
+
+    /**
+     * 단어를 번역하는 자업을 한다.
+     *
+     * @param wordsList
+     */
+    private void translateWords(ArrayList<String> wordsList) {
         mWordItems.clear();
 
         // 큐에 넣고 작업하는건 어떨까?
@@ -111,6 +120,11 @@ public class GetWordPresenterImpl implements GetWordPresenter {
         }
     }
 
+    /**
+     * 받은 리스트의 반을 리턴한다.
+     * @param list
+     * @return
+     */
     public Pair<List<String>, List<String>> halfList(List<String> list) {
         System.out.println("called halfList");
         int size = list.size();

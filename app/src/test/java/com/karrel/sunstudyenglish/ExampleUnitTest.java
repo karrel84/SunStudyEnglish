@@ -4,10 +4,15 @@ import android.support.v4.util.Pair;
 
 import org.junit.Test;
 
+import java.time.LocalTime;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Queue;
+import java.util.concurrent.ThreadLocalRandom;
+
+import rx.Observable;
+import rx.schedulers.Schedulers;
 
 import static org.junit.Assert.*;
 
@@ -81,5 +86,34 @@ public class ExampleUnitTest {
     public static double logB(double x, double base) {
         return Math.log(x) / Math.log(base);
     }
+
+
+    @Test
+    public void testRx(){
+        Observable observable = Observable.range(1, 10)
+                .flatMap(i -> Observable.just(i))
+                .subscribeOn(Schedulers.computation())
+                .map(i2 -> intenseCalculation(i2));
+
+        observable.subscribe(i -> System.out.println("Received " + i + " "
+                + LocalTime.now() + " on thread "
+                + Thread.currentThread().getName()));
+
+
+    }
+
+    public static <T> T intenseCalculation(T value) {
+        sleep(ThreadLocalRandom.current().nextInt(3000));
+        return value;
+    }
+
+    private static void sleep(int millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }
