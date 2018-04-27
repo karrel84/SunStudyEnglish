@@ -1,4 +1,4 @@
-package com.karrel.sunstudyenglish.presenter;
+package com.karrel.sunstudyenglish.presenter.main;
 
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.view.ViewPager;

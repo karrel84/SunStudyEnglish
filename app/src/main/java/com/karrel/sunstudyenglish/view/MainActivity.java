@@ -6,8 +6,8 @@ import android.os.Bundle;
 import com.karrel.sunstudyenglish.R;
 import com.karrel.sunstudyenglish.base.BaseActivity;
 import com.karrel.sunstudyenglish.databinding.ActivityMainBinding;
-import com.karrel.sunstudyenglish.presenter.MainPresenter;
-import com.karrel.sunstudyenglish.presenter.MainPresenterImpl;
+import com.karrel.sunstudyenglish.presenter.main.MainPresenter;
+import com.karrel.sunstudyenglish.presenter.main.MainPresenterImpl;
 import com.karrel.sunstudyenglish.view.adapter.ViewPagerAdapter;
 
 public class MainActivity extends BaseActivity implements MainPresenter.View {

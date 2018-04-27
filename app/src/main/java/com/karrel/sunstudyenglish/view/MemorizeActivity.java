@@ -2,7 +2,6 @@ package com.karrel.sunstudyenglish.view;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.widget.Toast;
 
 import com.karrel.mylibrary.RLog;
@@ -11,10 +10,9 @@ import com.karrel.sunstudyenglish.base.BaseActivity;
 import com.karrel.sunstudyenglish.databinding.ActivityMemorizeBinding;
 import com.karrel.sunstudyenglish.model.GroupItem;
 import com.karrel.sunstudyenglish.model.WordItem;
-import com.karrel.sunstudyenglish.presenter.MemorizePresenter;
-import com.karrel.sunstudyenglish.presenter.MemorizePresenterImpl;
+import com.karrel.sunstudyenglish.presenter.memorize.MemorizePresenter;
+import com.karrel.sunstudyenglish.presenter.memorize.MemorizePresenterImpl;
 import com.karrel.sunstudyenglish.view.adapter.MemorizeAdapter;
-import com.karrel.sunstudyenglish.view.adapter.WordAdapter;
 
 /**
  * 단어를 외우는 액티비티이다

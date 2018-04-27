@@ -1,4 +1,4 @@
-package com.karrel.sunstudyenglish.presenter;
+package com.karrel.sunstudyenglish.presenter.memorize;
 
 import com.karrel.sunstudyenglish.model.GroupItem;
 import com.karrel.sunstudyenglish.model.WordItem;
